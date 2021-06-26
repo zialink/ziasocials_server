@@ -1,7 +1,7 @@
 import Post from "../../models/posts.js";
 import { AuthenticationError, UserInputError } from "apollo-server";
 
-import { createPostInput } from "../../util/validation.js";
+import { validatePostInput } from "../../util/validation.js";
 import { checkAuth } from "../../util/checkAuth.js";
 
 const postResolvers = {
@@ -32,7 +32,7 @@ const postResolvers = {
 
   Mutation: {
     async createPost(_, { title, caption, image }, context) {
-      const { errors, valid } = createPostInput(title, caption);
+      const { errors, valid } = validatePostInput(title, caption);
 
       if (!valid) {
         throw new UserInputError("Errors: ", { errors });

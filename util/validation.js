@@ -21,7 +21,8 @@ const validateRegisterInput = (
   if (email.trim() === "") {
     errors.email = "email must not be empty";
   } else {
-    const regEx = /^([0-9a-zA-Z]([-.\w]*[0-9a-zA-Z])*@([0-9a-zA-Z][-\w]*[0-9a-zA-Z]\.)+[a-zA-Z]{2,9})$/;
+    const regEx =
+      /^([0-9a-zA-Z]([-.\w]*[0-9a-zA-Z])*@([0-9a-zA-Z][-\w]*[0-9a-zA-Z]\.)+[a-zA-Z]{2,9})$/;
     if (!email.match(regEx)) {
       errors.email = "Email must be a valid email address";
     }
@@ -55,7 +56,7 @@ const validateLoginInput = (username, password) => {
 };
 
 //Create Post Input Validation
-const createPostInput = (title, caption) => {
+const validatePostInput = (title, caption) => {
   const errors = {};
   if (title.trim() == "") {
     errors.title = "Please give your post a title!";
@@ -70,4 +71,4 @@ const createPostInput = (title, caption) => {
   };
 };
 
-export { validateRegisterInput, validateLoginInput, createPostInput };
+export { validateRegisterInput, validateLoginInput, validatePostInput };
