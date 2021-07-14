@@ -6,7 +6,7 @@ import resolvers from "./graphql/resolvers/index.js";
 import connectDB from "./config/db.js";
 
 dotenv.config({ path: "./config/config.env" });
-const PORT = process.env.PORT || 4500;
+const PORT = process.env.PORT || 4000;
 
 connectDB();
 

@@ -61,6 +61,36 @@ const postResolvers = {
       }
     },
 
+    async editPost(_, { postId, title, caption, image }, context) {
+      const { errors, valid } = validatePostInput(title, caption);
+
+      if (!valid) {
+        throw new UserInputError("Errors: ", { errors });
+      }
+      const user = checkAuth(context);
+
+      try {
+        const post = await Post.findById(postId);
+        if (post.username === user.username) {
+          await post.updateOne({
+            title,
+            caption,
+            image,
+          });
+          post.save();
+          return post;
+        } else {
+          throw new UserInputError("Post not found", {
+            errors: {
+              post: "Post not found!",
+            },
+          });
+        }
+      } catch (error) {
+        throw new Error(error);
+      }
+    },
+
     async deletePost(_, { postId }, context) {
       const user = checkAuth(context);
 
